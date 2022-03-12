@@ -1,0 +1,41 @@
+const uniqueId = Symbol('Hello');
+
+// Well Known Symbols 
+
+Symbol.iterator;
+
+const arr = [1, 2, 3, 4];
+
+const it = arr[Symbol.iterator]();
+
+/* while (true) {
+    let {value, done} = it.next();
+
+    if (done) {break;}
+    console.log(value)
+} */
+
+/* for (let value of arr) {
+    console.log(value);
+};
+ */
+//Tornando um objeto iteravel
+const obj = { 
+    values: [1, 2, 3, 4],
+    [Symbol.iterator]() {
+        let i = 0;
+        return {
+            next: () => {
+                return {
+                    value: this.values[i],
+                    done: i > this.values.length
+                };
+                i++;
+            }
+        };
+    }
+};
+
+for (let value of obj) {
+    console.log(value);
+};
